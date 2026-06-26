@@ -1,0 +1,30 @@
+# Virtual Environment
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# dbt
+target/
+dbt_packages/
+
+# Airflow
+airflow/logs/
+airflow/airflow.db
+
+# Streamlit
+.streamlit/
+
+# Python cache
+.pytest_cache/
