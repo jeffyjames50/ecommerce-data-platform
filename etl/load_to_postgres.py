@@ -12,10 +12,14 @@ def get_engine():
     return create_engine(connection_string)
 
 
-def load_table(csv_path, table_name, schema="raw"):
+def load_csv_to_postgres(csv_path, table_name, schema="raw"):
     engine = get_engine()
 
     df = pd.read_csv(csv_path)
+
+    if df.empty:
+        print(f"⚠️ Skipping {table_name} (empty file)")
+        return
 
     print(f"Loading {len(df)} rows into {schema}.{table_name}...")
 
@@ -27,11 +31,24 @@ def load_table(csv_path, table_name, schema="raw"):
         index=False
     )
 
-    print(f"Successfully loaded {table_name}")
+    print(f"✅ Loaded {table_name}")
+
+
+def run_full_pipeline():
+    base_path = "data/raw"
+
+    tables = {
+        "customers": "customers.csv",
+        "products": "products.csv",
+        "orders": "orders.csv",
+        "order_items": "order_items.csv",
+        "user_events": "user_events.csv"
+    }
+
+    for table_name, file_name in tables.items():
+        csv_path = f"{base_path}/{file_name}"
+        load_csv_to_postgres(csv_path, table_name)
 
 
 if __name__ == "__main__":
-    load_table(
-        "data/raw/customers.csv",
-        "customers"
-    )
+    run_full_pipeline()
