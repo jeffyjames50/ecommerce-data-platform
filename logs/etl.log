@@ -1,0 +1,40 @@
+2026-06-30 15:09:49,584 | INFO | Loading 1000 rows into raw.customers
+2026-06-30 15:09:49,823 | INFO | Successfully loaded customers
+2026-06-30 15:09:49,844 | INFO | Loading 200 rows into raw.products
+2026-06-30 15:09:49,964 | INFO | Successfully loaded products
+2026-06-30 15:09:49,984 | INFO | Loading 5000 rows into raw.orders
+2026-06-30 15:09:50,271 | INFO | Successfully loaded orders
+2026-06-30 15:09:50,305 | INFO | Loading 15229 rows into raw.order_items
+2026-06-30 15:09:51,051 | INFO | Successfully loaded order_items
+2026-06-30 15:09:51,094 | INFO | Loading 20000 rows into raw.user_events
+2026-06-30 15:09:51,883 | INFO | Successfully loaded user_events
+2026-06-30 15:41:07,469 | INFO | Loading 1000 rows into raw.customers
+2026-06-30 15:41:07,677 | INFO | Successfully loaded customers
+2026-06-30 15:41:07,691 | INFO | Loading 200 rows into raw.products
+2026-06-30 15:41:07,802 | INFO | Successfully loaded products
+2026-06-30 15:41:07,818 | INFO | Loading 5000 rows into raw.orders
+2026-06-30 15:41:08,149 | INFO | Successfully loaded orders
+2026-06-30 15:41:08,160 | INFO | Loading 15229 rows into raw.order_items
+2026-06-30 15:41:08,878 | INFO | Successfully loaded order_items
+2026-06-30 15:41:08,904 | INFO | Loading 20000 rows into raw.user_events
+2026-06-30 15:41:09,679 | INFO | Successfully loaded user_events
+2026-06-30 15:45:59,245 | INFO | Loading 1000 rows into raw.customers
+2026-06-30 15:45:59,537 | INFO | Successfully loaded customers
+2026-06-30 15:45:59,541 | INFO | Loading 200 rows into raw.products
+2026-06-30 15:45:59,668 | INFO | Successfully loaded products
+2026-06-30 15:45:59,678 | INFO | Loading 5000 rows into raw.orders
+2026-06-30 15:46:00,100 | INFO | Successfully loaded orders
+2026-06-30 15:46:00,119 | INFO | Loading 15229 rows into raw.order_items
+2026-06-30 15:46:00,742 | INFO | Successfully loaded order_items
+2026-06-30 15:46:00,773 | INFO | Loading 20000 rows into raw.user_events
+2026-06-30 15:46:01,555 | INFO | Successfully loaded user_events
+2026-06-30 15:48:57,071 | INFO | Loading 1000 rows into raw.customers
+2026-06-30 15:48:57,286 | INFO | Successfully loaded customers
+2026-06-30 15:48:57,291 | INFO | Loading 200 rows into raw.products
+2026-06-30 15:48:57,424 | INFO | Successfully loaded products
+2026-06-30 15:48:57,433 | INFO | Loading 5000 rows into raw.orders
+2026-06-30 15:48:57,728 | INFO | Successfully loaded orders
+2026-06-30 15:48:57,740 | INFO | Loading 15229 rows into raw.order_items
+2026-06-30 15:48:58,315 | INFO | Successfully loaded order_items
+2026-06-30 15:48:58,342 | INFO | Loading 20000 rows into raw.user_events
+2026-06-30 15:48:59,116 | INFO | Successfully loaded user_events

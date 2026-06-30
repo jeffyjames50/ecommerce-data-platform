@@ -1,6 +1,9 @@
 import pandas as pd
 from sqlalchemy import create_engine
 from config.database import DB_CONFIG
+from etl.logger import logger
+from etl.validator import DataValidator
+from config.settings import REQUIRED_COLUMNS
 
 
 def get_engine():
@@ -15,13 +18,19 @@ def get_engine():
 def load_csv_to_postgres(csv_path, table_name, schema="raw"):
     engine = get_engine()
 
-    df = pd.read_csv(csv_path)
+    DataValidator.file_exists(csv_path)
+
+    df = DataValidator.read_csv(csv_path)
+
+    DataValidator.check_empty(df)
+
+    DataValidator.check_required_columns(df,REQUIRED_COLUMNS[table_name])
 
     if df.empty:
         print(f"⚠️ Skipping {table_name} (empty file)")
         return
 
-    print(f"Loading {len(df)} rows into {schema}.{table_name}...")
+    logger.info(f"Loading {len(df)} rows into {schema}.{table_name}")
 
     df.to_sql(
         table_name,
@@ -31,7 +40,7 @@ def load_csv_to_postgres(csv_path, table_name, schema="raw"):
         index=False
     )
 
-    print(f"✅ Loaded {table_name}")
+    logger.info(f"Successfully loaded {table_name}")
 
 
 def run_full_pipeline():
