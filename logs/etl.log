@@ -38,3 +38,19 @@
 2026-06-30 15:48:58,315 | INFO | Successfully loaded order_items
 2026-06-30 15:48:58,342 | INFO | Loading 20000 rows into raw.user_events
 2026-06-30 15:48:59,116 | INFO | Successfully loaded user_events
+2026-06-30 16:49:39,475 | INFO | Processing table: customers
+2026-06-30 16:54:12,500 | INFO | Processing table: customers
+2026-06-30 16:54:12,745 | INFO | Loading 1000 rows into raw.customers
+2026-06-30 16:54:12,842 | INFO | Successfully loaded customers
+2026-06-30 16:54:12,842 | INFO | Processing table: products
+2026-06-30 16:54:12,872 | INFO | Loading 200 rows into raw.products
+2026-06-30 16:54:12,897 | INFO | Successfully loaded products
+2026-06-30 16:54:12,897 | INFO | Processing table: orders
+2026-06-30 16:54:12,949 | INFO | Loading 5000 rows into raw.orders
+2026-06-30 16:54:13,132 | INFO | Successfully loaded orders
+2026-06-30 16:54:13,132 | INFO | Processing table: order_items
+2026-06-30 16:54:13,157 | INFO | Loading 15229 rows into raw.order_items
+2026-06-30 16:54:13,638 | INFO | Successfully loaded order_items
+2026-06-30 16:54:13,638 | INFO | Processing table: user_events
+2026-06-30 16:54:13,690 | INFO | Loading 20000 rows into raw.user_events
+2026-06-30 16:54:14,344 | INFO | Successfully loaded user_events

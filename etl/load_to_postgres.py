@@ -1,35 +1,66 @@
 import pandas as pd
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
+
 from config.database import DB_CONFIG
+from config.settings import (
+    REQUIRED_COLUMNS,
+    PRIMARY_KEYS,
+    REQUIRED_NOT_NULL,
+    POSITIVE_NUMERIC_COLUMNS,
+)
+
 from etl.logger import logger
 from etl.validator import DataValidator
-from config.settings import REQUIRED_COLUMNS
 
 
 def get_engine():
     connection_string = (
         f"postgresql+psycopg2://{DB_CONFIG['user']}:"
-        f"{DB_CONFIG['password']}@{DB_CONFIG['host']}:"
-        f"{DB_CONFIG['port']}/{DB_CONFIG['database']}"
+        f"{DB_CONFIG['password']}@"
+        f"{DB_CONFIG['host']}:"
+        f"{DB_CONFIG['port']}/"
+        f"{DB_CONFIG['database']}"
     )
     return create_engine(connection_string)
 
 
-def load_csv_to_postgres(csv_path, table_name, schema="raw"):
-    engine = get_engine()
+def truncate_table(engine, schema, table_name):
+    with engine.begin() as conn:
+        conn.execute(
+            text(
+                f"TRUNCATE TABLE {schema}.{table_name} "
+                "RESTART IDENTITY CASCADE"
+            )
+        )
 
-    DataValidator.file_exists(csv_path)
 
-    df = DataValidator.read_csv(csv_path)
-
+def validate_dataset(df, table_name):
     DataValidator.check_empty(df)
 
-    DataValidator.check_required_columns(df,REQUIRED_COLUMNS[table_name])
+    DataValidator.check_required_columns(
+        df,
+        REQUIRED_COLUMNS[table_name]
+    )
 
-    if df.empty:
-        print(f"⚠️ Skipping {table_name} (empty file)")
-        return
+    DataValidator.check_duplicates(
+        df,
+        PRIMARY_KEYS[table_name]
+    )
 
+    DataValidator.check_nulls(
+        df,
+        REQUIRED_NOT_NULL[table_name]
+    )
+
+    if table_name in POSITIVE_NUMERIC_COLUMNS:
+        DataValidator.check_positive_values(
+            df,
+            POSITIVE_NUMERIC_COLUMNS[table_name]
+        )
+
+
+
+def load_dataframe(df, table_name, engine, schema="raw"):
     logger.info(f"Loading {len(df)} rows into {schema}.{table_name}")
 
     df.to_sql(
@@ -43,8 +74,31 @@ def load_csv_to_postgres(csv_path, table_name, schema="raw"):
     logger.info(f"Successfully loaded {table_name}")
 
 
-def run_full_pipeline():
+def load_csv_to_postgres(csv_path, table_name, engine, schema="raw", mode="refresh"):
+    logger.info(f"Processing table: {table_name}")
+
+    # 1. Validate file exists
+    DataValidator.file_exists(csv_path)
+
+    # 2. Read data (controlled way)
+    df = DataValidator.read_csv(csv_path)
+
+    # 3. Validation layer
+    validate_dataset(df, table_name)
+
+    # 4. Refresh logic
+    if mode == "refresh":
+        truncate_table(engine, schema, table_name)
+
+    # 5. Load data
+    load_dataframe(df, table_name, engine, schema)
+
+
+
+
+def run_full_pipeline(mode="refresh"):
     base_path = "data/raw"
+    engine = get_engine()
 
     tables = {
         "customers": "customers.csv",
@@ -56,8 +110,14 @@ def run_full_pipeline():
 
     for table_name, file_name in tables.items():
         csv_path = f"{base_path}/{file_name}"
-        load_csv_to_postgres(csv_path, table_name)
+
+        load_csv_to_postgres(
+            csv_path,
+            table_name,
+            engine,
+            mode=mode
+        )
 
 
 if __name__ == "__main__":
-    run_full_pipeline()
+    run_full_pipeline(mode="refresh")

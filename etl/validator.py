@@ -24,3 +24,34 @@ class DataValidator:
 
         if missing:
             raise ValueError(f"Missing required columns: {sorted(missing)}")
+        
+    @staticmethod
+    def check_duplicates(df: pd.DataFrame, key_columns):
+        duplicates = df.duplicated(subset=key_columns).sum()
+
+        if duplicates > 0:
+            raise ValueError(
+                f"Found {duplicates} duplicate rows for keys {key_columns}"
+            )
+        
+
+    @staticmethod
+    def check_nulls(df: pd.DataFrame, required_fields):
+        null_counts = df[required_fields].isnull().sum()
+
+        bad_fields = null_counts[null_counts > 0]
+
+        if not bad_fields.empty:
+            raise ValueError(
+                f"Null values found:\n{bad_fields}"
+            )
+        
+
+    @staticmethod
+    def check_positive_values(df: pd.DataFrame, columns):
+        for col in columns:
+            if col in df.columns:
+                if (df[col] < 0).any():
+                    raise ValueError(
+                        f"Negative values found in column '{col}'"
+                    )
