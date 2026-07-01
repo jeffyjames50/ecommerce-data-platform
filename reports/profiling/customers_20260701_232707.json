@@ -1,0 +1,35 @@
+{
+    "row_count": 1000,
+    "column_count": 7,
+    "columns": [
+        "customer_id",
+        "first_name",
+        "last_name",
+        "email",
+        "country",
+        "city",
+        "signup_date"
+    ],
+    "memory_usage_kb": 406.97,
+    "null_values": {
+        "customer_id": 0,
+        "first_name": 0,
+        "last_name": 0,
+        "email": 0,
+        "country": 0,
+        "city": 0,
+        "signup_date": 0
+    },
+    "duplicate_rows": 0,
+    "unique_values": {
+        "customer_id": 1000,
+        "first_name": 353,
+        "last_name": 488,
+        "email": 998,
+        "country": 241,
+        "city": 958,
+        "signup_date": 533
+    },
+    "table": "customers",
+    "generated_at": "2026-07-01T23:27:07.671975"
+}
