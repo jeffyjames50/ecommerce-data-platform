@@ -9,6 +9,11 @@ from config.settings import (
     POSITIVE_NUMERIC_COLUMNS,
 )
 
+from etl.profiler import (
+    DataProfiler,
+    save_profile_report,
+)
+
 from etl.logger import logger
 from etl.validator import DataValidator
 
@@ -85,6 +90,12 @@ def load_csv_to_postgres(csv_path, table_name, engine, schema="raw", mode="refre
 
     # 3. Validation layer
     validate_dataset(df, table_name)
+
+    profile = DataProfiler.profile_dataframe(df)
+
+    report_path = save_profile_report(profile,table_name)
+
+    logger.info(f"Profile report saved: {report_path}")
 
     # 4. Refresh logic
     if mode == "refresh":

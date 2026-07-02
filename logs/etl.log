@@ -54,3 +54,23 @@
 2026-06-30 16:54:13,638 | INFO | Processing table: user_events
 2026-06-30 16:54:13,690 | INFO | Loading 20000 rows into raw.user_events
 2026-06-30 16:54:14,344 | INFO | Successfully loaded user_events
+2026-07-02 14:47:18,855 | INFO | Processing table: customers
+2026-07-02 14:47:18,894 | INFO | Profile report saved: reports\profiling\customers_20260702_144718.json
+2026-07-02 14:47:19,020 | INFO | Loading 1000 rows into raw.customers
+2026-07-02 14:47:19,102 | INFO | Successfully loaded customers
+2026-07-02 14:47:19,102 | INFO | Processing table: products
+2026-07-02 14:47:19,123 | INFO | Profile report saved: reports\profiling\products_20260702_144719.json
+2026-07-02 14:47:19,147 | INFO | Loading 200 rows into raw.products
+2026-07-02 14:47:19,161 | INFO | Successfully loaded products
+2026-07-02 14:47:19,161 | INFO | Processing table: orders
+2026-07-02 14:47:19,188 | INFO | Profile report saved: reports\profiling\orders_20260702_144719.json
+2026-07-02 14:47:19,211 | INFO | Loading 5000 rows into raw.orders
+2026-07-02 14:47:19,339 | INFO | Successfully loaded orders
+2026-07-02 14:47:19,339 | INFO | Processing table: order_items
+2026-07-02 14:47:19,371 | INFO | Profile report saved: reports\profiling\order_items_20260702_144719.json
+2026-07-02 14:47:19,401 | INFO | Loading 15229 rows into raw.order_items
+2026-07-02 14:47:19,756 | INFO | Successfully loaded order_items
+2026-07-02 14:47:19,756 | INFO | Processing table: user_events
+2026-07-02 14:47:19,810 | INFO | Profile report saved: reports\profiling\user_events_20260702_144719.json
+2026-07-02 14:47:19,830 | INFO | Loading 20000 rows into raw.user_events
+2026-07-02 14:47:20,307 | INFO | Successfully loaded user_events

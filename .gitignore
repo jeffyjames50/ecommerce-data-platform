@@ -28,3 +28,7 @@ airflow/airflow.db
 
 # Python cache
 .pytest_cache/
+
+# Generated profiling reports
+reports/profiling/*.json
+reports/validation/*.json
