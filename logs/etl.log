@@ -74,3 +74,27 @@
 2026-07-02 14:47:19,810 | INFO | Profile report saved: reports\profiling\user_events_20260702_144719.json
 2026-07-02 14:47:19,830 | INFO | Loading 20000 rows into raw.user_events
 2026-07-02 14:47:20,307 | INFO | Successfully loaded user_events
+2026-07-03 12:37:53,882 | INFO | Processing staging table: customers
+2026-07-03 12:41:01,690 | INFO | Processing staging table: customers
+2026-07-03 12:41:01,965 | INFO | Loaded staging.customers
+2026-07-03 12:41:01,965 | INFO | Processing staging table: products
+2026-07-03 12:41:02,007 | INFO | Loaded staging.products
+2026-07-03 12:41:02,007 | INFO | Processing staging table: orders
+2026-07-03 12:41:02,349 | INFO | Loaded staging.orders
+2026-07-03 12:41:02,349 | INFO | Processing staging table: order_items
+2026-07-03 12:41:03,074 | INFO | Loaded staging.order_items
+2026-07-03 12:41:03,074 | INFO | Processing staging table: user_events
+2026-07-03 12:41:04,240 | INFO | Loaded staging.user_events
+2026-07-03 12:41:04,243 | INFO | Staging pipeline completed successfully.
+2026-07-03 12:55:05,459 | INFO | Processing staging table: customers
+2026-07-03 12:55:05,721 | INFO | Loaded staging.customers
+2026-07-03 12:55:05,721 | INFO | Processing staging table: products
+2026-07-03 12:55:05,757 | INFO | Loaded staging.products
+2026-07-03 12:55:05,757 | INFO | Processing staging table: orders
+2026-07-03 12:55:05,947 | INFO | Loaded staging.orders
+2026-07-03 12:55:05,948 | INFO | Processing staging table: order_items
+2026-07-03 12:55:06,307 | INFO | Loaded staging.order_items
+2026-07-03 12:55:06,307 | INFO | Processing staging table: user_events
+2026-07-03 12:55:06,895 | INFO | Loaded staging.user_events
+2026-07-03 12:55:06,895 | INFO | Staging pipeline completed successfully.
+2026-07-03 14:11:26,554 | INFO | Loaded warehouse.dim_customers
