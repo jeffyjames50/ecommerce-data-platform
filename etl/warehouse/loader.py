@@ -25,6 +25,9 @@ def truncate_table(table_name):
                 f"TRUNCATE TABLE warehouse.{table_name} CASCADE"
             )
         )
+    logger.info(
+        f"Truncated warehouse.{table_name}"
+    )
 
 
 def load_dataframe(df, table_name):
