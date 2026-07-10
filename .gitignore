@@ -32,3 +32,7 @@ airflow/airflow.db
 # Generated profiling reports
 reports/profiling/*.json
 reports/validation/*.json
+
+# Logs
+logs/
+*.log
