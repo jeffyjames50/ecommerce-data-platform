@@ -47,6 +47,33 @@ def load_fact_orders():
         "fact_orders"
     )
 
+def transform_user_events():
+
+    df = read_staging_table("user_events")
+
+    return df[
+        [
+            "event_id",
+            "customer_id",
+            "product_id",
+            "event_type",
+            "event_timestamp"
+        ]
+    ]
+
+
+def load_fact_user_events():
+
+    df = transform_user_events()
+
+    truncate_table("fact_user_events")
+
+    load_dataframe(
+        df,
+        "fact_user_events"
+    )
+
 
 if __name__ == "__main__":
     load_fact_orders()
+    load_fact_user_events()
