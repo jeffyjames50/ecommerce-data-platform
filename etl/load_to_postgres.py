@@ -1,5 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
+from pathlib import Path
 
 from config.database import DB_CONFIG
 from config.settings import (
@@ -108,7 +109,8 @@ def load_csv_to_postgres(csv_path, table_name, engine, schema="raw", mode="refre
 
 
 def run_full_pipeline(mode="refresh"):
-    base_path = "data/raw"
+    BASE_DIR = Path(__file__).resolve().parents[1]
+    base_path = BASE_DIR / "data" / "raw"
     engine = get_engine()
 
     tables = {
@@ -120,7 +122,7 @@ def run_full_pipeline(mode="refresh"):
     }
 
     for table_name, file_name in tables.items():
-        csv_path = f"{base_path}/{file_name}"
+        csv_path = base_path / file_name
 
         load_csv_to_postgres(
             csv_path,
