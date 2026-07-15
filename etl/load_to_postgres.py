@@ -100,6 +100,7 @@ def load_csv_to_postgres(csv_path, table_name, engine, schema="raw", mode="refre
 
     # 4. Refresh logic
     if mode == "refresh":
+        
         truncate_table(engine, schema, table_name)
 
     # 5. Load data
