@@ -20,7 +20,11 @@ def transform_customers(df):
 
 def load_dim_customers(df, engine):
     with engine.begin() as conn:
-        conn.execute(text("TRUNCATE TABLE warehouse.dim_customers"))
+        conn.execute(
+            text(
+                "TRUNCATE TABLE warehouse.dim_customers CASCADE"
+            )
+        )
 
     df.to_sql(
         "dim_customers",

@@ -9,12 +9,40 @@ services:
       POSTGRES_DB: airflow
     ports:
       - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+
+
+  ecommerce-init:
+    image: postgres:17
+    depends_on:
+      - postgres
+    volumes:
+      - ./ecommerce-init:/ecommerce-init
+    environment:
+      PGPASSWORD: airflow
+    command:
+      - bash
+      - -c
+      - |
+        until pg_isready -h postgres -U airflow; do
+          sleep 2
+        done
+
+        psql -h postgres -U airflow -d ecommerce_dw -f /ecommerce-init/01_create_schemas.sql
+        psql -h postgres -U airflow -d ecommerce_dw -f /ecommerce-init/02_create_raw_tables.sql
+        psql -h postgres -U airflow -d ecommerce_dw -f /ecommerce-init/03_create_staging_tables.sql
+        psql -h postgres -U airflow -d ecommerce_dw -f /ecommerce-init/04_create_warehouse_tables.sql
+        psql -h postgres -U airflow -d ecommerce_dw -f /ecommerce-init/05_create_analytics.sql
+
 
 
   airflow-init:
     image: apache/airflow:2.10.5
     depends_on:
-      - postgres
+      ecommerce-init:
+        condition: service_completed_successfully
     environment:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
@@ -48,6 +76,11 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__WEBSERVER__SECRET_KEY: "ecommerce-airflow-secret-key"
       PYTHONPATH: /opt/airflow/project
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ecommerce_dw
+      DB_USER: airflow
+      DB_PASSWORD: airflow
     command:
       - webserver
 
@@ -65,5 +98,13 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__WEBSERVER__SECRET_KEY: "ecommerce-airflow-secret-key"
       PYTHONPATH: /opt/airflow/project
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ecommerce_dw
+      DB_USER: airflow
+      DB_PASSWORD: airflow
     command:
       - scheduler
+
+volumes:
+  postgres_data:

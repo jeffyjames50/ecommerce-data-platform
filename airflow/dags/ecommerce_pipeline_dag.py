@@ -15,12 +15,15 @@ def load_staging():
 
 
 def load_dimensions():
+    
+    
+
+    from etl.load_dim_customers import run as load_dim_customers
     from etl.warehouse.dimensions import (
-        load_dim_customers,
         load_dim_products,
         load_dim_date,
     )
-
+    
     load_dim_customers()
     load_dim_products()
     load_dim_date()

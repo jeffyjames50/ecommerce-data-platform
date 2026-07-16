@@ -1,0 +1,2 @@
+-- Analytics views will be created by the analytics deployment step
+-- Keep this file for future automatic initialization
