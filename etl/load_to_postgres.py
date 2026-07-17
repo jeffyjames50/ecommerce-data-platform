@@ -20,13 +20,28 @@ from etl.validator import DataValidator
 
 
 def get_engine():
-    connection_string = (
-        f"postgresql+psycopg2://{DB_CONFIG['user']}:"
-        f"{DB_CONFIG['password']}@"
-        f"{DB_CONFIG['host']}:"
-        f"{DB_CONFIG['port']}/"
-        f"{DB_CONFIG['database']}"
-    )
+    try:
+        from airflow.hooks.base import BaseHook
+
+        conn = BaseHook.get_connection("ecommerce_postgres")
+
+        connection_string = (
+            f"postgresql+psycopg2://{conn.login}:"
+            f"{conn.password}@"
+            f"{conn.host}:"
+            f"{conn.port}/"
+            f"{conn.schema}"
+        )
+
+    except ImportError:
+        connection_string = (
+            f"postgresql+psycopg2://{DB_CONFIG['user']}:"
+            f"{DB_CONFIG['password']}@"
+            f"{DB_CONFIG['host']}:"
+            f"{DB_CONFIG['port']}/"
+            f"{DB_CONFIG['database']}"
+        )
+
     return create_engine(connection_string)
 
 
