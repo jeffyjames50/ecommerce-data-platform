@@ -39,6 +39,12 @@ def load_facts():
     load_fact_user_events()
 
 
+def validate_warehouse():
+    from etl.warehouse.validation import run_validation
+
+    run_validation()
+
+
 default_args = {
     "owner": "data_engineering",
     "retries": 1,
@@ -78,4 +84,10 @@ with DAG(
     )
 
 
-    raw_task >> staging_task >> dimension_task >> fact_task
+    validation_task = PythonOperator(
+        task_id="validate_warehouse",
+        python_callable=validate_warehouse,
+    )
+
+
+    raw_task >> staging_task >> dimension_task >> fact_task >> validation_task
